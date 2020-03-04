@@ -11,6 +11,7 @@ export type IKakaoToken = {
     readonly token_type: string;
     refresh_token: string;
     expires_in: number;
+    refresh_token_expires_in: number;
     readonly scope: String;
 };
 
@@ -32,6 +33,7 @@ export class KakaoToken {
             refresh_token: '',
             expires_in: 0,
             scope: '',
+            refresh_token_expires_in: 0,
         };
 
         // then try and decode the jwt using jwt-decode

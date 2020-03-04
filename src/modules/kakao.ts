@@ -43,6 +43,8 @@ export function getKakaoAccessTokenThunk(code: string): ThunkAction<void, RootSt
         dispatch(request);
         try {
             const result = await getKakaoAccessToken(code);
+            console.log('result : ', result)
+            KakaoToken.storeToken(result);
             dispatch(success(result))
         } catch (e) {
             dispatch(failure(e));
@@ -62,20 +64,30 @@ export interface KakaoState {
     token_type: "bearer",
     refresh_token: string,
     expires_in: number,
-    scope: string
+    scope: string,
+    refresh_token_expires_in: number,
+    error: Error;
 }
 
 const initialState: KakaoState = {
     access_token: "",
     expires_in: 0,
+    refresh_token_expires_in: 0,
     refresh_token: "",
     scope: "",
-    token_type: "bearer"
+    token_type: "bearer",
+
+    //디버깅용 Axios Error
+    error: {
+        name: '',
+        message: '',
+        stack: '',
+    }
 }
 const reducer = createReducer<KakaoState, KakaoAction>(initialState, {
     [KAKAO_LOGIN_REQUEST]: state => ({...state}),
     [KAKAO_LOGIN_SUCCESS]: state => ({...state}),
-    [KAKAO_LOGIN_FAILURE]: state => ({...state}),
+    [KAKAO_LOGIN_FAILURE]: (state, action) => ({...state, error: {...action.payload}}),
     [GET_KAKAO_ACCESS_TOKEN_REQUEST]: state => ({...state}),
     [GET_KAKAO_ACCESS_TOKEN_SUCCESS]: (state, action) => {
         return {
@@ -83,7 +95,7 @@ const reducer = createReducer<KakaoState, KakaoAction>(initialState, {
             ...action.payload
         }
     },
-    [GET_KAKAO_ACCESS_TOKEN_FAILURE]: state => ({...state}),
+    [GET_KAKAO_ACCESS_TOKEN_FAILURE]: (state, action) => ({...state, error: {...action.payload}}),
     [SAVE_KAKAO_TOKEN]: (state, action) => {
         KakaoToken.storeToken(action.payload);
         return {

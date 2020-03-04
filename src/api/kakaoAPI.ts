@@ -6,7 +6,8 @@ export interface getKakaoAccessTokenAPIType {
     token_type: "bearer",
     refresh_token: string,
     expires_in: number,
-    scope: string
+    scope: string,
+    refresh_token_expires_in: number
 }
 
 export async function getKakaoAccessToken(code: string) {
