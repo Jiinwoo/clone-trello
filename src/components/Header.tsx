@@ -4,9 +4,11 @@ import {ReactComponent as Logo} from "../assets/logo.svg";
 
 function Header() {
     return (
-        <Link to={'/'}>
-            <Logo width={200} height={200}/>
-        </Link>
+        <header className={"App-header"}>
+            <Link to={'/'}>
+                <Logo width={200} height={200}/>
+            </Link>
+        </header>
     )
 }
 

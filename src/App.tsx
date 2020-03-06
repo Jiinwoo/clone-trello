@@ -11,7 +11,6 @@ function App() {
         <div className="App">
             <Header/>
             <Switch>
-
                 <Route path={'/social/login/kakao'}>
                     <RedirectContainer/>
                 </Route>
