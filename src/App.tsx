@@ -1,25 +1,30 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom'
-import Header from "./components/Header";
-import RedirectContainer from "./containers/RedirectContainer";
+import KakaoSignupFormContainer from "./containers/KakaoSignupFormContainer";
 import BoardContainer from "./containers/BoardContainer";
 import LoginContainer from "./containers/LoginContainer";
+import Layout from "./components/Layout/Layout";
+import SignupFormContainer from "./containers/SignupFormContainer";
 
 
 function App() {
     return (
         <div className="App">
-            <Header/>
             <Switch>
                 <Route path={'/social/login/kakao'}>
-                    <RedirectContainer/>
+                    <KakaoSignupFormContainer/>
                 </Route>
                 <Route path={'/login'}>
                     <LoginContainer/>
                 </Route>
-                <Route path={'/'}>
-                    <BoardContainer/>
+                <Route path={'/signup'}>
+                    <SignupFormContainer/>
                 </Route>
+                <Layout>
+                    <Route path={'/'}>
+                        <BoardContainer/>
+                    </Route>
+                </Layout>
             </Switch>
         </div>
     );

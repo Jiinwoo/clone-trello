@@ -1,10 +1,10 @@
 import React, {useEffect} from "react";
-import Redirect from "../components/Redirect";
 import {useQuery, useSelector} from "../hooks";
 import {getKakaoAccessTokenThunk} from "../modules/kakao";
 import {useDispatch} from "react-redux";
+import KakaoSignupForm from "../components/KakaoSignupForm/KakaoSignupForm";
 
-function RedirectContainer() {
+function KakaoSignupFormContainer() {
     const dispatch = useDispatch();
     const {access_token} = useSelector(state => state.kakao);
     let query = useQuery();
@@ -14,9 +14,9 @@ function RedirectContainer() {
         }
     }, []);
 
-    return (<Redirect
+    return (<KakaoSignupForm
         code={query.get('code')!} accessToken={access_token}/>)
 }
 
 
-export default RedirectContainer
+export default KakaoSignupFormContainer
