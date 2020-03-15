@@ -24,6 +24,3 @@ export const secondaryBoard = () => {
 export const disabledBoard = () => {
     return <Board disabled={true}/>
 }
-export const disabledBoard1 = () => {
-    return <Board disabled={true}/>
-}
